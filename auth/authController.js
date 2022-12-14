@@ -11,7 +11,7 @@ const generateAcessToken = id => {
 class authRouter {
   async registration(req, res) {
     try {
-      const { email, username, password, settings } = req.body;
+      const { email, name, password, settings } = req.body;
 
       const candidate = await User.findOne({ email: email });
       if (candidate) {
@@ -22,7 +22,7 @@ class authRouter {
 
       const user = new User({
         email: email,
-        username: username,
+        name: name,
         password: hashPassword,
         settings: settings,
       });

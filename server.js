@@ -1,16 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors")
+const cors = require("cors");
 const authRouter = require("./auth/authRouter");
 require("dotenv").config();
 
 app = express();
 
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 app.use("", authRouter);
-app.use(cors({
-  origin: '*'
-}))
 
 function start() {
   try {

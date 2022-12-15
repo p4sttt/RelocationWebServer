@@ -45,16 +45,18 @@ class authRouter {
       if (!user) {
         return res.status(400).json({ msg: "user not found" });
       }
-      const validPassword = bcrypt.compare(password, user.password);
+      const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
         return res.status(400).json({ msg: "incorrect password" });
       }
 
       const token = generateAcessToken(user._id)
 
-      return res.status(200).json(token)
+      return res.status(200).json({
+        token: token
+      })
     } catch (error) {
-      res.status(400).json({ msg: "registration error" });
+      res.status(400).json({ msg: "login error" });
       console.log(error);
     }
   }
@@ -65,7 +67,7 @@ class authRouter {
 
       return res.status(200).json(users);
     } catch (error) {
-      res.status(400).json({ msg: "registration error" });
+      res.status(400).json({ msg: "get users error" });
       console.log(error);
     }
   }

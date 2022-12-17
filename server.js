@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const authRouter = require("./auth/authRouter");
+const userRouter = require("./user/userRouter");
 require("dotenv").config();
 
 app = express();
@@ -11,8 +12,10 @@ app.use(
     origin: "*",
   })
 );
+
 app.use(express.json());
 app.use("", authRouter);
+app.use("", userRouter);
 
 function start() {
   try {

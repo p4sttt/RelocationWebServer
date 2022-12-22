@@ -85,16 +85,25 @@ class userRouter {
 
       return res.status(200).json({ msg: "success" });
     } catch (error) {
-      res.status(400).json({msg: "error"})
+      res.status(400).json({ msg: "error" });
     }
   }
   async getTags(req, res) {
     try {
-      const tags = await Tag.find({})
+      const tags = await Tag.find({});
 
-      res.status(200).json(tags)
+      res.status(200).json(tags);
     } catch (error) {
-      res.status(400).json({msg: "get tags error"})
+      res.status(400).json({ msg: "get tags error" });
+    }
+  }
+  async getCountries(req, res) {
+    try {
+      
+      res.status(200)
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ msg: "get countries error" });
     }
   }
 }

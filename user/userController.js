@@ -3,7 +3,7 @@ const Tag = require("../models/Tag");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
-const getFromAcessToken = (token) => {
+const getIdFromAcessToken = (token) => {
   return jwt.decode(token);
 };
 
@@ -12,7 +12,7 @@ class userRouter {
     try {
       const { token } = req.headers;
       const { temperature, tags, job, countries } = req.body;
-      const { id } = getFromAcessToken(token);
+      const { id } = getIdFromAcessToken(token);
 
       const settings = {
         temperature: temperature,
@@ -84,7 +84,18 @@ class userRouter {
       });
 
       return res.status(200).json({ msg: "success" });
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({msg: "error"})
+    }
+  }
+  async getTags(req, res) {
+    try {
+      const tags = await Tag.find({})
+
+      res.status(200).json(tags)
+    } catch (error) {
+      res.status(400).json({msg: "get tags error"})
+    }
   }
 }
 

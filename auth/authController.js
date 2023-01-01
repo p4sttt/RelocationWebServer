@@ -29,7 +29,7 @@ class authRouter {
 
       const token = generateAcessToken(user._id)
 
-      return res.status(200).json(token)
+      return res.status(200).json({token: token})
     } catch (error) {
       res.status(400).json({ msg: "registration error" });
       console.log(error);

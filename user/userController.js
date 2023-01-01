@@ -11,13 +11,12 @@ class userRouter {
   async setSettings(req, res) {
     try {
       const { token } = req.headers;
-      const { temperature, tags, job, countries } = req.body;
+      const { temperature, tags, countries } = req.body;
       const { id } = getIdFromAcessToken(token);
 
       const settings = {
         temperature: temperature,
         tags: tags,
-        job: job,
         countries: countries,
       };
 
@@ -25,30 +24,33 @@ class userRouter {
 
       return res.status(200).json(settings);
     } catch (error) {
+      console.log(error)
       res.status(400).json({ msg: "set settings error" });
     }
   }
   async getSettings(req, res) {
     try {
       const { token } = req.headers;
-      const { id } = getFromAcessToken(token);
+      const { id } = getIdFromAcessToken(token);
 
       const { settings } = await User.findOne({ _id: id });
 
-      return res.status(200).json(settings);
+      return res.status(200).json({settings: settings});
     } catch (error) {
+      console.log(error)
       res.status(400).json({ msg: "get settings error" });
     }
   }
   async getUser(req, res) {
     try {
       const { token } = req.headers;
-      const { id } = getFromAcessToken(token);
+      const { id } = getIdFromAcessToken(token);
 
       const user = await User.findOne({ _id: id });
 
-      return res.status(200).json(user);
+      return res.status(200).json({user: user});
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ msg: "get user info error" });
     }
   }
@@ -56,8 +58,9 @@ class userRouter {
     try {
       const users = await User.find({});
 
-      return res.status(200).json(users);
+      return res.status(200).json({users: users});
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ msg: "get users error" });
     }
   }
@@ -85,6 +88,7 @@ class userRouter {
 
       return res.status(200).json({ msg: "success" });
     } catch (error) {
+      console.log(error)
       res.status(400).json({ msg: "error" });
     }
   }
@@ -94,12 +98,12 @@ class userRouter {
 
       res.status(200).json(tags);
     } catch (error) {
+      console.log(error)
       res.status(400).json({ msg: "get tags error" });
     }
   }
   async getCountries(req, res) {
     try {
-      
       res.status(200)
     } catch (error) {
       console.log(error)

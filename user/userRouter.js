@@ -4,6 +4,7 @@ const controller = require("./userController");
 const router = Router();
 
 router.post("/settings", controller.setSettings);
+router.post("/country", )
 router.get("/settings", controller.getSettings);
 router.get("/user", controller.getUser);
 router.get("/users", controller.getUsers);

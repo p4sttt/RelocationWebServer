@@ -11,5 +11,6 @@ router.get("/users", controller.getUsers);
 router.get("/tags", controller.getTags)
 router.get("/skhdfbask", controller.createTag);
 router.get("/s/countries", controller.getCountries)
+router.get("/deleteaccount", controller.deleteAccount)
 
 module.exports = router;

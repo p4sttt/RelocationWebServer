@@ -6,14 +6,16 @@ const newsapi = new NewsApi("9e301fa39d544ace888d840476d8417e");
 class dashboardRouter {
   async getNews(req, res) {
     try {
-      const promies = newsapi.v2.everything({
-        q: "travelling",
+      const promise = newsapi.v2.topHeadlines({
+        // q: "travelling OR journey",
+        sources: 'bbc-news,the-verge',
+        language: 'en',
+        pageSize: 4,
+        page: 1
       });
+      const news = await promise.then((res) => res.articles);
 
-      let data = await promies.then((res) => res.articles);
-      data = data.slice(0, 4);
-
-      res.status(200).json({ news: data });
+      res.status(200).json({ news: news });
     } catch (error) {
       res.status(400).json({ msg: "get news error" });
       console.log(error);
@@ -25,7 +27,7 @@ class dashboardRouter {
       let agencies_ = await Country.findOne({ name: country });
       res.status(200).json({ agencies: agencies_.agencies });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(400).json({ msg: "get all agencies error" });
     }
   }

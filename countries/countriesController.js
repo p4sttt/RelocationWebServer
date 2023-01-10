@@ -9,7 +9,6 @@ const getIdFromAcessToken = (token) => {
 class countriesRouter {
   async getCountries(req, res) {
     const countries = await Country.find({});
-
     res.status(200).json({ countries: countries });
     try {
     } catch (error) {
@@ -38,11 +37,11 @@ class countriesRouter {
       const { token } = req.headers;
       const { id } = getIdFromAcessToken(token);
       const user = await User.findById(id);
-      const countries = user.settings.countries
+      const countries = user.settings.countries;
       const userCountries = [];
 
-      for(const country of countries){
-        userCountries.push(await Country.findOne({"name": country}))
+      for (const country of countries) {
+        userCountries.push(await Country.findOne({ name: country }));
       }
 
       res.status(200).json({ userCountries });

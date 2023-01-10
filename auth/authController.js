@@ -24,6 +24,12 @@ class authRouter {
         email: email,
         name: name,
         password: hashPassword,
+        img: null,
+        settings: {
+          temperature: null,
+          tags: null,
+          countries: null
+        }
       });
       user.save();
 

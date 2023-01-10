@@ -46,7 +46,13 @@ class userRouter {
       const { token } = req.headers;
       const { id } = getIdFromAcessToken(token);
 
-      const user = await User.findOne({ _id: id });
+      const {email, name, img, settings} = await User.findOne({ _id: id });
+      const user = {
+        email: email,
+        name: name,
+        img: img,
+        settings: settings
+      }
 
       return res.status(200).json({ user: user });
     } catch (error) {

@@ -1,7 +1,7 @@
 const NewsApi = require("newsapi");
 const Agency = require("../models/Agency");
 
-const newsapi = new NewsApi("9e301fa39d544ace888d840476d8417e");
+const newsapi = new NewsApi(process.env.NEWS_API_KEY);
 
 class dashboardRouter {
   async getNews(req, res) {

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,7 +6,6 @@ const authRouter = require("./auth/authRouter");
 const userRouter = require("./user/userRouter");
 const countriesRouter = require("./countries/countriesRouter");
 const dashboardRouter = require("./dashboard/dashboardRouter");
-require("dotenv").config();
 
 app = express();
 
